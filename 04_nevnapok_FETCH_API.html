@@ -9,15 +9,33 @@
 
 <body>
     <p id="valasz"></p>
+    <p id="feldolgozva"></p>
     <script>
+        let str = ""
         async function nevnapok() {
             const response = await
                 fetch("https://nameday.abalin.net/api/V2/today");
             const nevek = await response.json();
             document.getElementById("valasz").innerHTML = JSON.stringify(nevek.data);
+            return nevek.data
         }
-        nevnapok();
+        
+        async function kereso() {
+            let data = await nevnapok()
+
+            for (const element of data) {
+                str +=  element + "\n"
+            }
+            document.getElementById("valasz").innerHTML = str;
+        }
+
+
+        kereso()
+
     </script>
+
+    <!-- A kapott adatokon kell végigmennem -->
+    <!-- {"at":"Alto, Anna Katharina(e)","bg":"n/a","cz":"Apolena","de":"Anna, Anne-Kathrin, Apollonia, Katharina","dk":"Apollonia","ee":"Mehis, Mehto","es":"Donato, Sabino, Reinaldo, Apolonia","fi":"Raija, Raisa","fr":"Appoline","gr":"n/a","hr":"Apolonija, Zora, Sunčica","hu":"Abigél, Alex","it":"Apollonia, Vergine E Martire","lt":"Alge, Apolonija, Erikas, Joviltas","lv":"Apolonija, Simona","pl":"Bernard, Eryk, Eryka","ru":"Defend democracy, support Ukraine!","se":"Fanny","sk":"Zdenko","us":"Apollo, Apollonia, Carson, Dalton"} -->
 
 </body>
 
