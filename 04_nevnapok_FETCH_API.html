@@ -32,17 +32,37 @@
                 str += `${countryCode}: ${names}<br>`;
             }
 
-            // document.getElementById("feldolgozva").innerHTML = str;
             document.getElementById("magyar").innerHTML = data.hu;
         }
 
         // Gomb eseménykezelő
         document.getElementById("nevnapGomb").addEventListener("click", kereso);
 
+
+                // POST kérés példa
+                async function nevnapokPost() {
+            const data = {
+                "day": 1,
+                "month": 1
+            };
+            
+            const response = await fetch("https://nameday.abalin.net/api/V2/date", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const nevek = await response.json();
+            console.log("POST válasz:", nevek);
+        }
+        
+        nevnapokPost(); // Kikommentezve, ha szeretnéd használni, vedd ki a kommentet
+
     </script>
 
-    <!-- A kapott adatokon kell végigmennem -->
-    <!-- {"at":"Alto, Anna Katharina(e)","bg":"n/a","cz":"Apolena","de":"Anna, Anne-Kathrin, Apollonia, Katharina","dk":"Apollonia","ee":"Mehis, Mehto","es":"Donato, Sabino, Reinaldo, Apolonia","fi":"Raija, Raisa","fr":"Appoline","gr":"n/a","hr":"Apolonija, Zora, Sunčica","hu":"Abigél, Alex","it":"Apollonia, Vergine E Martire","lt":"Alge, Apolonija, Erikas, Joviltas","lv":"Apolonija, Simona","pl":"Bernard, Eryk, Eryka","ru":"Defend democracy, support Ukraine!","se":"Fanny","sk":"Zdenko","us":"Apollo, Apollonia, Carson, Dalton"} -->
 
 </body>
 
